@@ -1,6 +1,7 @@
-import styled, { css, createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
-const Style = createGlobalStyle`
+// Global styles for the entire app
+export default createGlobalStyle`
 :root {
   // colors
   --color-primary: #27ae60;
@@ -44,6 +45,20 @@ const Style = createGlobalStyle`
     box-sizing: inherit;
   }
 
+   body,html{
+    width: 100vw;
+    height: 100vh;
+  }
+
+  body{
+    font-family: 'Inter, sans-serif';
+    background-color: var(--gray-0);
+    color: var(--gray-100);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+  }
 
   button {
     cursor: pointer;
@@ -62,18 +77,16 @@ const Style = createGlobalStyle`
     border: none;
     } 
 
-  body{
-    font-family: 'Inter, sans-serif';
-    background-color: var(--gray-0);
-    color: var(--gray-100);
-    font-size: var(--font-size-md);
-  }
 
   h1, h2, h3, h4, h5, h6, p, span, li{
     font-family: 'Inter, sans-serif';
     color : var(--gray-100);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-normal);
   }
-
+@media (min-width: 768px) {
+  html {
+    font-size: 62.5%;
+  }
+}
   `;
-
-export default Style;
