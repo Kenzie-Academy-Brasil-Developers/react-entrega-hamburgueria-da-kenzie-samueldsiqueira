@@ -45,7 +45,7 @@ export default createGlobalStyle`
     box-sizing: inherit;
   }
 
-   body,html{
+   body{
     width: 100vw;
     height: 100vh;
   }
@@ -69,9 +69,13 @@ export default createGlobalStyle`
   ul, ol, li{
     list-style: none;
     }
-    img{
-        max-width: 100%;
+
+  img{
+    width: 100px;
+    height: 100px;
+    max-width: 100%;
     }
+    
   input, select{
     background: transparent;
     border: none;

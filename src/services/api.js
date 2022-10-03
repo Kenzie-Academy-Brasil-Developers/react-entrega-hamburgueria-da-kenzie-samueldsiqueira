@@ -5,14 +5,13 @@ const apiGateway = axios.create({
 	timeout: 4000,
 });
 
-const getAllProducts = () => {
-	try {
-		const response = apiGateway.get('/products');
-		console.log(response.data);
-		return response.data;
-	} catch (error) {
-		console.error(error);
-	}
-};
+// const getAllProducts = async () => {
+// 	try {
+// 		const response = await apiGateway.get('/products');
+// 		return response.data.results;
+// 	} catch (error) {
+// 		console.error(error);
+// 	}
+// };
 
-export default getAllProducts;
+export default apiGateway;

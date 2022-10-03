@@ -1,82 +1,60 @@
-import { useEffect, useState } from "react";
-import api from "../../services/api";
-import Buttons from "./Buttons/Buttons.jsx";
-import Header from "./Header/Header.jsx";
-import ProductsList from "./ProductsList/ProductsList.jsx";
-import Cart from "./Cart/Cart.jsx";
+import { useEffect, useState } from 'react'
+import apiGateway from "../../services/api";
+import Header from './Header/Header'
+
 
 const Dashboard = () => {
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [total, setTotal] = useState(0);
-  const [cartOpen, setCartOpen] = useState(false);
+  const [allProducts, setAllProducts] = useState([]) 
 
-  // useEffect(() => {
-  //   api.get()
+    useEffect(() => {
+      apiGateway.get('/products')
+        .then((response) => {
+          setAllProducts(response.data)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+      
 
-
-
-  const handleAddToCart = (product) => {
-    const cartItem = cart.find((item) => item.id === product.id);
-    if (cartItem) {
-      setCart(
-        cart.map((item) =>
-          item.id === product.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : item
-        )
-      );
-    } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
-    }
-  };
-
-  const handleRemoveFromCart = (product) => {
-    const cartItem = cart.find((item) => item.id === product
-      .id);
-    if (cartItem.quantity === 1) {
-    } else {
-      setCart(
-        cart.map((item) =>
-          item.id === product.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : item
-        )
-      );
-    }
-  };
-
-  const handleRemoveAllFromCart = (product) => {
-    setCart(cart.filter((item) => item.id !== product.id));
-  }
-
-  const handleCartOpen = () => {
-    setCartOpen(true);
-  }
-
-  const handleCartClose = () => {
-    setCartOpen(false);
-  }
-
-  useEffect(() => {
-    setTotal(
-      cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
-    );
-  }
-    , [cart]);
+    }, []);
   
   return (
-    <div className="dashboard">
-      <header> <img src="https://img.freepik.com/vetores-gratis/hamburguer-queijo-com-ilustracao-do-icone-do-vetor-dos-desenhos-animados-do-fogo-conceito-de-icone-de-objeto-de-comida-isolado-premium_138676-5539.jpg"></img>
-      <input type="search" name="" placeholder="encontre" id="" />
-      </header>
+    <div >
+      <Header/>
       <main>
         <section>
           <ul>
-            <li>
-              <h1></h1>
-            </li>
+              { allProducts.map((product) => (
+                <li key={product.id}>
+                  <img src={product.img} alt={product.name} />
+                  <h3>{product.name}</h3>
+                  <p>{product.category}</p>
+                  <p>{product.price}</p>
+                  <button>Adicionar ao carrinho</button>
+                </li> 
+             ))}
           </ul>
         </section>
-    </main>
-      
-    </div>
+        <section className='cart'>
+          <h2>Carrinho</h2>
+          <ul>
+            <li>
+              <img src="https://img.freepik.com/vetores-gratis/hamburguer-queijo-com-ilustracao-do-icone-do-vetor-dos-desenhos-animados-do-fogo-conceito-de-icone-de-objeto-de-comida-isolado-premium_138676-5539.jpg"></img>
+              <h3>Nome do produto</h3>
+              <p>Preço</p>
+              <p>Quantidade</p>
+              <p>Subtotal</p>
+            </li>
+          </ul>
+          <div className='total'>
+            <p>Total</p>
+            <p>R$ 0,00</p>
+            <button type="submit">Remover Todos</button>
+          </div>
+
+        </section>
+      </main>
+      </div>
   );
 };
 
