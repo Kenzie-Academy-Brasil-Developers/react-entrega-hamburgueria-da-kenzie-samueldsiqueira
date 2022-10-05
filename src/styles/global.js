@@ -1,7 +1,8 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
-// Global styles for the entire app
 export default createGlobalStyle`
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 :root {
   // colors
   --color-primary: #27ae60;
@@ -45,14 +46,14 @@ export default createGlobalStyle`
     box-sizing: inherit;
   }
 
-   body{
+   body, html{
     width: 100vw;
     height: 100vh;
   }
 
   body{
-    font-family: 'Inter, sans-serif';
-    background-color: var(--gray-0);
+    font-family: 'Inter', sans-serif;
+    background-color: #FFFFFF;
     color: var(--gray-100);
     -webkit-font-smoothing: antialiased;
   }
@@ -71,11 +72,9 @@ export default createGlobalStyle`
     }
 
   img{
-    width: 100px;
-    height: 100px;
     max-width: 100%;
     }
-    
+
   input, select{
     background: transparent;
     border: none;
@@ -88,9 +87,9 @@ export default createGlobalStyle`
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-normal);
   }
-@media (min-width: 768px) {
-  html {
+/* @media (min-width: 768px) {
+  body {
     font-size: 62.5%;
   }
-}
-  `;
+} */
+`;

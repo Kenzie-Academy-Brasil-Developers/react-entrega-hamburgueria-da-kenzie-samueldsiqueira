@@ -1,11 +1,19 @@
+import style from './Header.module.css';
 
-
-const Header = () => {
-  return(
-<div>
-  <img src="https://img.freepik.com/vetores-gratis/hamburguer-queijo-com-ilustracao-do-icone-do-vetor-dos-desenhos-animados-do-fogo-conceito-de-icone-de-objeto-de-comida-isolado-premium_138676-5539.jpg"></img>
-<input type="search" name="" placeholder="encontre" id="" />
-    </div>)
-}
+const Header = ({ handleSearch, children }) => {
+	return (
+		<nav className={style.brand}>
+			<div className={style.brandLogo}>
+				<h1>
+					Burger <strong>Kenzie</strong>
+				</h1>
+			</div>
+			<div className={style.searchInput}>
+				<input className={style.brandSearch} onChange={handleSearch} type='search' name='search' placeholder='Digitar Pesquisa' />
+				<input className={style.btnSearch} type='submit' value='Pesquisar' />
+			</div>
+		</nav>
+	);
+};
 
 export default Header;

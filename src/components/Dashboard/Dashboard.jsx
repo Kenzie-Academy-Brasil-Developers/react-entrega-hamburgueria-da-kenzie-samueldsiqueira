@@ -1,64 +1,87 @@
-import { useEffect, useState } from 'react'
-import apiGateway from "../../services/api";
-import Header from './Header/Header'
-
+import Global from '../../styles/global';
+import { useEffect, useState } from 'react';
+import apiGateway from '../../services/api';
+import Header from './Header/Header';
+import ProductList from './ProductsList/ProductList';
 
 const Dashboard = () => {
-  const [allProducts, setAllProducts] = useState([]) 
+	const [allProducts, setAllProducts] = useState([]);
+	const [filteredProducts, setFilteredProducts] = useState([]);
+	const [currentSale, setCurrentSale] = useState([]);
+	const [cartTotal, setCartTotal] = useState(0);
 
-    useEffect(() => {
-      apiGateway.get('/products')
-        .then((response) => {
-          setAllProducts(response.data)
-        })
-        .catch((error) => {
-          console.error(error)
-        })
-      
+	useEffect(() => {
+		apiGateway
+			.get('/products')
+			.then((response) => {
+				setAllProducts(response.data);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}, []);
 
-    }, []);
-  
-  return (
-    <div >
-      <Header/>
-      <main>
-        <section>
-          <ul>
-              { allProducts.map((product) => (
-                <li key={product.id}>
-                  <img src={product.img} alt={product.name} />
-                  <h3>{product.name}</h3>
-                  <p>{product.category}</p>
-                  <p>{product.price}</p>
-                  <button>Adicionar ao carrinho</button>
-                </li> 
-             ))}
-          </ul>
-        </section>
-        <section className='cart'>
-          <h2>Carrinho</h2>
-          <ul>
-            <li>
-              <img src="https://img.freepik.com/vetores-gratis/hamburguer-queijo-com-ilustracao-do-icone-do-vetor-dos-desenhos-animados-do-fogo-conceito-de-icone-de-objeto-de-comida-isolado-premium_138676-5539.jpg"></img>
-              <h3>Nome do produto</h3>
-              <p>Preço</p>
-              <p>Quantidade</p>
-              <p>Subtotal</p>
-            </li>
-          </ul>
-          <div className='total'>
-            <p>Total</p>
-            <p>R$ 0,00</p>
-            <button type="submit">Remover Todos</button>
-          </div>
+	useEffect(() => {
+		setFilteredProducts(allProducts);
+	}, [allProducts]);
 
-        </section>
-      </main>
-      </div>
-  );
+	useEffect(() => {
+		const total = currentSale.reduce((acc, product) => {
+			return acc + product.price * product.quantity;
+		}, 0);
+		setCartTotal(total);
+	}, [currentSale]);
+
+	const handleSearch = (event) => {
+		const { value } = event.target;
+		const filtered = allProducts.filter((product) => {
+			return product.category.toLowerCase().includes(value.toLowerCase());
+		});
+		setFilteredProducts(filtered);
+	};
+
+	const handleAddToCart = (product) => {
+		const productAlreadyInCart = currentSale.find((item) => item.id === product.id);
+		if (productAlreadyInCart) {
+			const updatedCart = currentSale.map((item) => {
+				if (item.id === product.id) {
+					return {
+						...item,
+						quantity: item.quantity + 1,
+					};
+				}
+				return item;
+			});
+			setCurrentSale(updatedCart);
+		} else {
+			setCurrentSale([...currentSale, { ...product, quantity: 1 }]);
+		}
+	};
+
+	const handleRemoveFromCart = (product) => {
+		const productAlreadyInCart = currentSale.find((item) => item.id === product.id);
+		if (productAlreadyInCart) {
+			const updatedCart = currentSale.map((item) => {
+				if (item.id === product.id) {
+					return {
+						...item,
+						quantity: item.quantity - 1,
+					};
+				}
+				return item;
+			});
+			setCartTotal(cartTotal - product.price);
+			setCurrentSale(updatedCart);
+		}
+	};
+
+	return (
+		<div>
+			<Global />
+			<Header handleSearch={handleSearch} />
+			<ProductList filteredProducts={filteredProducts} handleAddToCart={handleAddToCart} />
+		</div>
+	);
 };
 
-
 export default Dashboard;
-
-
