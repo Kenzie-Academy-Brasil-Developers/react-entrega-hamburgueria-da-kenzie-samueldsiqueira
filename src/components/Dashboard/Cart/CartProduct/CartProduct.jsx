@@ -1,14 +1,14 @@
-const CartProduct = ({ id, name, price, category, quantity, handleRemoveFromCart, currentSale }) => {
+const CartProduct = ({ handleRemoveFromCart, currentSale }) => {
 	return (
 		<div className={style.productCard}>
-			<div id={id}>
+			<div id={currentSale.id}>
 				<div className={style.cardImage}>
-					<img src={img}></img>
+					<img src={currentSale.img}></img>
 				</div>
-				<h3>{name}</h3>
-				<p>{price}</p>
-				<p>{category}</p>
-				<span>{quantity}</span>
+				<h3>{currentSale.name}</h3>
+				<p>{currentSale.price}</p>
+				<p>{currentSale.category}</p>
+				<span>{currentSale.quantity}</span>
 				<button onClick={handleRemoveFromCart}>remover</button>
 			</div>
 
