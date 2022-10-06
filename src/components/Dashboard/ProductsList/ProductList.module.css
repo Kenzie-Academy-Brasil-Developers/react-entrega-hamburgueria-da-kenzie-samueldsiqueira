@@ -14,6 +14,7 @@
 }
 
 .productImage {
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
   background-color: var(--gray-0);

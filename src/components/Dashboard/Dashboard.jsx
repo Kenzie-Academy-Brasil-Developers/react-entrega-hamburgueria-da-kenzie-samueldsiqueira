@@ -4,6 +4,8 @@ import apiGateway from '../../services/api';
 import Header from './Header/Header';
 import ProductList from './ProductsList/ProductList';
 import Cart from './Cart/Cart';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 const Dashboard = () => {
 	const [allProducts, setAllProducts] = useState([]);
@@ -59,7 +61,13 @@ const Dashboard = () => {
 		<div>
 			<Global />
 			<Header handleSearch={handleSearch} />
-			<ProductList filteredProducts={filteredProducts} />
+			<Swiper className='mySwiper'>
+				{filteredProducts.map((filteredProducts) => (
+					<SwiperSlide key={filteredProducts.id}>
+						<ProductList filteredProducts={filteredProducts} />
+					</SwiperSlide>
+				))}
+			</Swiper>
 			<Cart currentSale={currentSale} handleRemoveFromCart={handleRemoveFromCart} />
 		</div>
 	);
