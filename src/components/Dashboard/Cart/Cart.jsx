@@ -1,25 +1,17 @@
 import CartProduct from './CartProduct/CartProduct';
+import TotalCart from './TotalCart/TotalCart';
+import EmptyCart from './EmptyCart/EmptyCart';
 import style from './Cart.module.css';
 
-const Cart = ({ currentSale, handleRemoveFromCart, quantity }) => {
+const Cart = ({ cartItem, quantity, cartTotal, removeAllItem }) => {
 	return (
 		<div className={style.cartContent}>
 			<div className={style.cartTitle}>
 				<h2>Carrinho de compras</h2>
 			</div>
 			<div>
-				{currentSale.length < 0 ? (
-					<CartProduct handleRemoveFromCart={handleRemoveFromCart} quantity={quantity} />
-				) : (
-					<div className={style.emptyCart}>
-						<div className={style.emptyTitle}>
-							<h2>Sua sacola está vazia</h2>
-						</div>
-						<div className={style.emptyInfo}>
-							<p>Adicione itens</p>
-						</div>
-					</div>
-				)}
+				{cartTotal === 0 ? <EmptyCart /> : <CartProduct key={cartItem.id} cartItem={cartItem} quantity={quantity} />}
+				<TotalCart cartTotal={cartTotal} onClick={() => removeAllItem(cartItem)} />
 			</div>
 		</div>
 	);

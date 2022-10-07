@@ -11,7 +11,9 @@ const Dashboard = () => {
 	const [allProducts, setAllProducts] = useState([]);
 	const [filteredProducts, setFilteredProducts] = useState([]);
 	const [currentSale, setCurrentSale] = useState([]);
+	const [cartItem, setCartItem] = useState([]);
 	const [cartTotal, setCartTotal] = useState(0);
+	const [quantity, setQuantity] = useState(0);
 
 	useEffect(() => {
 		apiGateway
@@ -29,23 +31,32 @@ const Dashboard = () => {
 	}, [allProducts]);
 
 	useEffect(() => {
-		const total = currentSale.reduce((acc, product) => {
+		setCartItem(currentSale);
+	}, [currentSale]);
+
+	useEffect(() => {
+		const total = cartItem.reduce((acc, product) => {
 			return acc + product.price * product.quantity;
 		}, 0);
 		setCartTotal(total);
-	}, [currentSale]);
+	}, [cartItem]);
 
-	const handleRemoveFromCart = (event) => {
-		event.preventDefault();
-		const productId = event.target.id;
-		const productExists = currentSale.find((item) => item.id === productId);
-		if (productExists.quantity === 1) {
-			setCurrentSale(currentSale.filter((item) => item.id !== productId));
-		}
-		if (productExists.quantity > 1) {
-			setCurrentSale(
-				currentSale.map((item) => (item.id === productId ? { ...productExists, quantity: productExists.quantity - 1 } : item)),
-			);
+	useEffect(() => {
+		const totalQuantity = cartItem.reduce((acc, product) => {
+			return acc + product.quantity;
+		}, 0);
+		setQuantity(totalQuantity);
+	}, [cartItem]);
+
+	const getCartItens = (product) => {
+		const { id, name, price, category, img, quantity } = product;
+		const productIndex = currentSale.findIndex((item) => item.id === product.id);
+		if (productIndex >= 0) {
+			const newSale = [...currentSale];
+			newSale[productIndex].quantity += 1;
+			setCurrentSale(newSale);
+		} else {
+			setCurrentSale((currentSale) => [...currentSale, { ...product, quantity: 1 }]);
 		}
 	};
 
@@ -57,6 +68,10 @@ const Dashboard = () => {
 		setFilteredProducts(filtered);
 	};
 
+	const removeAllItem = () => {
+		setCurrentSale([]);
+	};
+
 	return (
 		<div>
 			<Global />
@@ -64,11 +79,11 @@ const Dashboard = () => {
 			<Swiper className='mySwiper'>
 				{filteredProducts.map((filteredProducts) => (
 					<SwiperSlide key={filteredProducts.id}>
-						<ProductList filteredProducts={filteredProducts} />
+						<ProductList filteredProducts={filteredProducts} onClick={() => getCartItens(filteredProducts)} />
 					</SwiperSlide>
 				))}
 			</Swiper>
-			<Cart currentSale={currentSale} handleRemoveFromCart={handleRemoveFromCart} />
+			<Cart cartItem={cartItem} cartTotal={cartTotal} quantity={quantity} removeAllItem={removeAllItem} />
 		</div>
 	);
 };

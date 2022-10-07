@@ -1,6 +1,6 @@
 import style from './ProductList.module.css';
 
-const ProductList = ({ filteredProducts }) => {
+const ProductList = ({ filteredProducts, onClick }) => {
 	return (
 		<>
 			<div className={style.productImage}>
@@ -9,9 +9,9 @@ const ProductList = ({ filteredProducts }) => {
 			<div className={style.productInfo}>
 				<h3>{filteredProducts.name}</h3>
 				<span>{filteredProducts.category}</span>
-				<p>{filteredProducts.price}</p>
+				<p>{filteredProducts.price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</p>
 				<div className={style.productBtn}>
-					<button className={style.btnItem} onClick={(e) => console.log(filteredProducts)}>
+					<button className={style.btnItem} onClick={onClick}>
 						Comprar
 					</button>
 				</div>
