@@ -6,6 +6,7 @@ import ProductList from './ProductsList/ProductList';
 import Cart from './Cart/Cart';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import { Container } from './styles';
 
 const Dashboard = () => {
 	const [allProducts, setAllProducts] = useState([]);
@@ -73,9 +74,10 @@ const Dashboard = () => {
 	};
 
 	return (
-		<div>
+		<>
 			<Global />
 			<Header handleSearch={handleSearch} />
+
 			<Swiper className='mySwiper'>
 				{filteredProducts.map((filteredProducts) => (
 					<SwiperSlide key={filteredProducts.id}>
@@ -83,8 +85,9 @@ const Dashboard = () => {
 					</SwiperSlide>
 				))}
 			</Swiper>
+
 			<Cart cartItem={cartItem} cartTotal={cartTotal} quantity={quantity} removeAllItem={removeAllItem} />
-		</div>
+		</>
 	);
 };
 

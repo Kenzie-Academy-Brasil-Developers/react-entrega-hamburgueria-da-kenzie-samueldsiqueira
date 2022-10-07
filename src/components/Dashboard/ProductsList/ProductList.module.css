@@ -126,3 +126,27 @@
   height: 100%;
   object-fit: cover;
 }
+
+
+/* only screen 1200 */
+
+@media (min-width: 1200px) {
+
+  .swiper,
+  .swiper-initialized,
+  .swiper-horizontalm .swiper-pointer-events,
+  .swiper-backface-hidden,
+  .swiper-wrapper,
+  .swiper-slide .swiper-slide-active {
+    max-width: 1200;
+    margin: 0;
+    padding: 0;
+
+  }
+
+  .productCard {
+    width: 90vw;
+    height: 45vh;
+  }
+
+}
