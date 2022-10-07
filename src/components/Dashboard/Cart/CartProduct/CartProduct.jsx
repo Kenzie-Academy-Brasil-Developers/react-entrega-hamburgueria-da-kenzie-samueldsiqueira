@@ -1,6 +1,11 @@
 import style from './CartProduct.module.css';
 
 const CartProduct = ({ cartItem, quantity }) => {
+	// const removeItem = () => {
+	// 	if (cartItem.quantity === 1) {
+	// 	}
+	// };
+
 	return (
 		<div>
 			{cartItem.length > 0
@@ -15,10 +20,10 @@ const CartProduct = ({ cartItem, quantity }) => {
 									<p>{cartItem.category}</p>
 								</div>
 								<div>
-									<span> x {quantity}</span>
+									<span> x {cartItem.quantity}</span>
 								</div>
 								<div className={style.cartButton}>
-									<button type='submit' onClick={(e) => quantity - 1}>
+									<button type='submit' onClick={(e) => console.log(cartItem.quantity)}>
 										Remover
 									</button>
 								</div>
