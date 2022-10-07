@@ -1,0 +1,48 @@
+h2 {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+p {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--gray-50);
+}
+
+.TotalCartContent {
+  display: block;
+  background-color: var(--gray-0);
+}
+
+.TotalCartContentHidden {
+  display: none;
+}
+
+.TotalCart {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  align-content: center;
+  gap: 55%;
+  height: 3rem;
+}
+
+.removeAllCart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.removeAllCart>button {
+  background-color: var(--gray-20);
+  color: var(--gray-50);
+  border: none;
+  width: 95%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 50px;
+  margin-bottom: 20px;
+}
