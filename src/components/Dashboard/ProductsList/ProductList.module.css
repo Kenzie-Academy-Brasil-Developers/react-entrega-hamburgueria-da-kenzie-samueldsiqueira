@@ -148,7 +148,8 @@
   .productCard {
     display: flex;
     max-width: 285px;
-    max-height: 360px;
+    height: 380px;
+    max-height: 380px;
     justify-content: center;
     align-items: center;
     align-content: center;
