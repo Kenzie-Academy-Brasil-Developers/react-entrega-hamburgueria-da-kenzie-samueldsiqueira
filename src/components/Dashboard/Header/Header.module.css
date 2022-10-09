@@ -95,14 +95,11 @@
   }
 
   .brandLogo {
-    margin-left: 115px;
     height: 100%;
     width: 30%;
   }
 
-  .brandLogo>h1 {
-    font-size: var(--font-size-xxxl);
-  }
+
 
   .brandLogo>h1>strong {
     font-size: var(--font-size-lg);

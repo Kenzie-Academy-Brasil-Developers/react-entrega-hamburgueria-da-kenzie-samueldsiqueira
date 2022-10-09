@@ -21,16 +21,23 @@
 
     .desktopView {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-content: center;
       margin-top: 1rem;
       gap: 2rem;
+      max-width: 1243px;
+      flex-wrap: wrap;
+
     }
 
     .mainContainer {
       display: grid;
-      grid-template-columns: 3fr 1fr;
+      grid-template-columns: 3fr 2fr;
       margin: 0 115px;
+    }
+
+    .cartDesktop {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
     }
   }

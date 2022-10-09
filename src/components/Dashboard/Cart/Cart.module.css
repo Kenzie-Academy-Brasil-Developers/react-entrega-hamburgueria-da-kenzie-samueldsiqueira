@@ -24,8 +24,7 @@
 
 @media (min-width: 768px) {
   .cartContent {
-    max-width: 600px;
-    max-height: 500px;
+    width: 37em;
     justify-content: flex-start;
   }
 

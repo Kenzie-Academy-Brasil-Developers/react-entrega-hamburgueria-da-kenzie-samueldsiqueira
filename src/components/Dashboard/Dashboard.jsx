@@ -103,7 +103,7 @@ const Dashboard = () => {
           <Swiper>
 
             {filteredProducts.map((filteredProducts) => (
-              <SwiperSlide key={filteredProducts.id}>
+              <SwiperSlide key={filteredProducts.id} pagination={true} modules={[Pagination]}>
                 <ProductList filteredProducts={filteredProducts} onClick={() => getCartItens(filteredProducts)} />
               </SwiperSlide>
             ))}
@@ -118,7 +118,7 @@ const Dashboard = () => {
           ))}
         </section>
 
-        <section>
+        <section className={style.cartDesktop}>
 
           <Cart cartItem={cartItem} cartTotal={cartTotal} quantity={quantity} removeAllItem={removeAllItem} />
         </section>
