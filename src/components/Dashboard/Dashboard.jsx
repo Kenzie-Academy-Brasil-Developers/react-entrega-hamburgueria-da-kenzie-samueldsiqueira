@@ -79,15 +79,9 @@ const Dashboard = () => {
     setCurrentSale([]);
   };
 
-  const removeItem = (id) => {
-    const newSale = [...currentSale];
-    const productIndex = newSale.findIndex((item) => item.id === id);
-    if (newSale[productIndex].quantity === 1) {
-      newSale.splice(productIndex, 1);
-    } else {
-      newSale[productIndex].quantity -= 1;
-    }
-    setCurrentSale(newSale);
+  const removeItem = () => {
+    console.log('removeItem')
+
   };
 
 
@@ -100,10 +94,10 @@ const Dashboard = () => {
 
       <main className={style.mainContainer}>
         <section className={style.mobileView}>
-          <Swiper>
+          <Swiper pagination={true} modules={[Pagination]}>
 
             {filteredProducts.map((filteredProducts) => (
-              <SwiperSlide key={filteredProducts.id} pagination={true} modules={[Pagination]}>
+              <SwiperSlide key={filteredProducts.id} >
                 <ProductList filteredProducts={filteredProducts} onClick={() => getCartItens(filteredProducts)} />
               </SwiperSlide>
             ))}

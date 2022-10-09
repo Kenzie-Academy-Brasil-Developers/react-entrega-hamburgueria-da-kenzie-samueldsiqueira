@@ -1,10 +1,7 @@
 import style from './CartProduct.module.css';
 
-const CartProduct = ({ cartItem, quantity }) => {
-  // const removeItem = () => {
-  // 	if (cartItem.quantity === 1) {
-  // 	}
-  // };
+const CartProduct = ({ cartItem, quantity, }) => {
+
 
   return (
     <div className={style.cartProducts}>
@@ -14,16 +11,16 @@ const CartProduct = ({ cartItem, quantity }) => {
             <div className={style.cartImage}>
               <img src={cartItem.img} />
             </div>
-
+            <div className={style.cartRemoveItem}>
+              <span>  {cartItem.quantity}x</span>
+            </div>
             <div className={style.cartTitles}>
-              <h3>{cartItem.name}</h3>
+              <h3> {cartItem.name}</h3>
               <p>{cartItem.category}</p>
             </div>
-            <div className={style.cartRemoveItem}>
-              <span>  {cartItem.quantity}</span>
-            </div>
+
             <div className={style.cartButton}>
-              <button type='submit' onClick={(e) => console.log(cartItem.quantity)}>
+              <button type='submit' onClick={() => console.log('falta terminar isso')}>
                 Remover
               </button>
             </div>
