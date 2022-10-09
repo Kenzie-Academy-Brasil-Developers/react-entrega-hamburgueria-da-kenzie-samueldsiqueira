@@ -1,16 +1,13 @@
 .cartContent {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   box-sizing: border-box;
 }
 
 .cartTitle {
   margin-top: 1rem;
   display: flex;
-  align-items: center;
-  width: 95vw;
+  width: 100%;
   background-color: var(--color-primary);
   border-radius: 0.2rem 0.2rem 0 0;
   height: 3.5rem;
@@ -22,4 +19,17 @@
   color: #FFFFFF;
   text-align: left;
   padding: 0.8rem;
+}
+
+
+@media (min-width: 768px) {
+  .cartContent {
+    max-width: 600px;
+    max-height: 500px;
+    justify-content: flex-start;
+  }
+
+  .cartTitle {
+    width: 100%;
+  }
 }
